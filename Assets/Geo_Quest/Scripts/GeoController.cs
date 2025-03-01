@@ -9,6 +9,7 @@ public class GeoController : MonoBehaviour
     Rigidbody2D rb;
     string String = "Hello ";
     int Player1 = 3;
+    public string nextLevel = "Scene_1";
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class GeoController : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(Player1);
+        //Debug.Log(Player1);
         Player1++;
 
         /*
@@ -76,13 +77,19 @@ public class GeoController : MonoBehaviour
 
         switch (collision.tag)
         {
-            case "finish":
+            case "Death":
                 {
                     string thislevel=SceneManager.GetActiveScene().name;
                     SceneManager.LoadScene(thislevel);
                     break;
+
                 }
-        }
+            case "Finish":
+                {
+                    SceneManager.LoadScene(nextLevel);
+                    break;
+                }
+                }
     }
 
 
