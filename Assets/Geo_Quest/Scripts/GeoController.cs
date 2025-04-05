@@ -14,18 +14,22 @@ public class GeoController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        rb= GetComponent<Rigidbody2D>();
+
+        rb = GetComponent<Rigidbody2D>();
         Debug.Log("Hello World");
         string String2 = "World";
-        Debug.Log(String+String2);
+        Debug.Log(String + String2);
+        _rigidbody2D = GetComponent<Rigidbody2D>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.y, jumpForce);
+        }
         //Debug.Log(Player1);
         Player1++;
 
@@ -69,8 +73,8 @@ public class GeoController : MonoBehaviour
         float xinput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(xinput * speed, rb.velocity.y);
     }
-        
-        
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Run Killer");
@@ -79,7 +83,7 @@ public class GeoController : MonoBehaviour
         {
             case "Death":
                 {
-                    string thislevel=SceneManager.GetActiveScene().name;
+                    string thislevel = SceneManager.GetActiveScene().name;
                     SceneManager.LoadScene(thislevel);
                     break;
 
@@ -89,11 +93,19 @@ public class GeoController : MonoBehaviour
                     SceneManager.LoadScene(nextLevel);
                     break;
                 }
-                }
+        }
     }
+    // Components
+    private Rigidbody2D _rigidbody2D;
+    // forces
+    public float jumpForce = 0.000004f;
 
+    // Sets gravity vector and connects components
 
-
+   
+    // Update is called once per frame
+        // Checks if player is trying to jump/ can jump
+       
 
 }
 
